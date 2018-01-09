@@ -9,18 +9,22 @@ else
     brew update
 fi
 
+# Change the Context to Docker's desktop K8S
+kubectl config use-context docker-for-desktop
 
+# No Longer Needed
 # Install minikube
-echo "Installing Minikube CLI..."
-brew cask install minikube
+#echo "Installing Minikube CLI..."
+#brew cask install minikube
 
 # Install Helm
 echo "Installing Helm CLI..."
 brew install kubernetes-helm
 
+# No Longer Needed
 # Start Minikube
-echo "Starting Minikube..."
-minikube start --memory=4096
+#echo "Starting Minikube..."
+#minikube start --memory=4096
 
 # Setup Helm
 echo "Setting up Helm..."
