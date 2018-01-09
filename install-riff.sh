@@ -10,6 +10,7 @@ else
 fi
 
 # Change the Context to Docker's desktop K8S
+#kubectl config use-context minikube 
 kubectl config use-context docker-for-desktop
 
 # No Longer Needed
@@ -59,9 +60,13 @@ wget https://raw.githubusercontent.com/projectriff/riff/583246872ac95871073f160e
 chmod +x riff
 mv riff /usr/local/bin/riff
 
+export GATEWAYPORT=`kubectl get svc demo-riff-http-gateway  -o=jsonpath='{.spec.ports[0].nodePort}'`
+export GATEWAY="http://localhost:${GATEWAYPORT}"
 
 echo -e "\n\nTo configure your terminal, run...\n
-eval \$(minikube docker-env)
-export GATEWAY=\`minikube service --url demo-riff-http-gateway\`
+kubectl config use-context docker-for-desktop
+export GATEWAY="http://localhost:"\`kubectl get svc demo-riff-http-gateway  -o=jsonpath='{.spec.ports[0].nodePort}'\`
 export HEADER=\"Content-Type: text/plain\"
 "
+
+
